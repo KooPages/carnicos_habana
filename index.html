@@ -6,6 +6,7 @@
     <title>Cárnicos Habana</title>
     <meta name="description" content="Cárnicos Habana - Productos cárnicos de calidad, carnes, mariscos y especialidades. Entrega en toda La Habana. Múltiples formas de pago.">
     <meta name="keywords" content="carnes, productos cárnicos, habana, pollo, cerdo, res, mariscos, ahumados">
+<link rel="icon" type="image/jpg" href="logo.jpg">
     <style>
         :root {
             --primary: #8B0000;
@@ -734,6 +735,7 @@
             const confirmationMessage = document.getElementById('confirmationMessage');
             const orderDateInput = document.getElementById('orderDate');
             
+            // Establecer fecha actual sin año
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
             orderDateInput.value = formattedDate;
@@ -880,6 +882,13 @@
                 totalAmountElement.textContent = total;
             }
             
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const day = date.getDate();
+                const month = date.getMonth() + 1;
+                return `${day}/${month}`;
+            }
+            
             function sendOrder() {
                 const customerName = document.getElementById('customerName').value;
                 const customerPhone = document.getElementById('customerPhone').value;
@@ -898,43 +907,64 @@
                     return;
                 }
                 
-                let orderText = `¡Hola! Quiero realizar el siguiente pedido:\n\n`;
-                orderText += `*Cliente:* ${customerName}\n`;
-                orderText += `*Teléfono:* ${customerPhone}\n`;
-                orderText += `*Dirección:* ${customerAddress}\n`;
-                orderText += `*Fecha del pedido:* ${orderDate}\n`;
+                // Formato mejorado para WhatsApp
+                let orderText = `🍖 *PEDIDO - CÁRNICOS HABANA* 🍖\n\n`;
+                orderText += `👤 *INFORMACIÓN DEL CLIENTE*\n`;
+                orderText += `• *Nombre:* ${customerName}\n`;
+                orderText += `• *Teléfono:* ${customerPhone}\n`;
+                orderText += `• *Dirección:* ${customerAddress}\n\n`;
+                
+                orderText += `📅 *INFORMACIÓN DEL PEDIDO*\n`;
+                orderText += `• *Fecha:* ${formatDate(orderDate)}\n`;
                 
                 if (orderTime) {
-                    orderText += `*Horario de entrega:* ${orderTime}\n`;
+                    orderText += `• *Horario de entrega:* ${orderTime}\n`;
                 }
                 
-                orderText += `*Entrega con mensajero:* ${delivery}\n`;
-                orderText += `*Forma de pago:* ${payment}\n`;
+                orderText += `• *Entrega con mensajero:* ${delivery}\n`;
+                orderText += `• *Forma de pago:* ${payment}\n\n`;
                 
-                orderText += `\n*Detalle del pedido:*\n`;
+                orderText += `🛒 *DETALLE DEL PEDIDO*\n`;
                 
                 let hasItems = false;
                 let total = 0;
                 
-                for (const productName in order) {
-                    if (order[productName] > 0) {
-                        hasItems = true;
-                        const product = products.find(p => p.name === productName);
-                        if (product) {
-                            const subtotal = product.price * order[productName];
-                            orderText += `- ${productName}: ${order[productName]} x $${product.price} = $${subtotal}\n`;
-                            total += subtotal;
+                // Agrupar productos por categoría
+                const categories = [...new Set(products.map(product => product.category))];
+                
+                categories.forEach(category => {
+                    let categoryHasItems = false;
+                    let categoryText = `\n*${category}*\n`;
+                    
+                    for (const productName in order) {
+                        if (order[productName] > 0) {
+                            const product = products.find(p => p.name === productName && p.category === category);
+                            if (product) {
+                                categoryHasItems = true;
+                                hasItems = true;
+                                const subtotal = product.price * order[productName];
+                                categoryText += `• ${productName}: ${order[productName]} x $${product.price} = $${subtotal}\n`;
+                                total += subtotal;
+                            }
                         }
                     }
-                }
+                    
+                    if (categoryHasItems) {
+                        orderText += categoryText;
+                    }
+                });
                 
                 if (!hasItems) {
                     alert('Por favor seleccione al menos un producto');
                     return;
                 }
                 
-                orderText += `\n*Total: $${total}*\n\n`;
-                orderText += `Gracias, Cárnicos Habana!`;
+                orderText += `\n💰 *TOTAL DEL PEDIDO: $${total}*\n\n`;
+                orderText += `📋 *NOTAS ADICIONALES*\n`;
+                orderText += `• Todos los paquetes son sellados al vacío y etiquetados\n`;
+                orderText += `• Mínimo de compra 10 x cada producto\n`;
+                orderText += `• Se entrega factura\n\n`;
+                orderText += `¡Gracias por su pedido! 🎉`;
                 
                 confirmationMessage.style.display = 'block';
                 

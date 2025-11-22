@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cárnicos Habana</title>
+    <meta name="description" content="Cárnicos Habana - Productos cárnicos de calidad, carnes, mariscos y especialidades. Entrega en toda La Habana. Múltiples formas de pago.">
+    <meta name="keywords" content="carnes, productos cárnicos, habana, pollo, cerdo, res, mariscos, ahumados">
     <style>
         :root {
             --primary: #8B0000;
@@ -90,12 +92,22 @@
             margin: 3px;
             font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #a00000;
+            transform: translateY(-2px);
         }
         
         .btn-secondary {
             background-color: transparent;
             border: 2px solid var(--secondary);
             color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(212, 175, 55, 0.1);
         }
         
         section {
@@ -206,24 +218,6 @@
             font-size: 0.9rem;
         }
         
-        .whatsapp-float {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background-color: #25D366;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            z-index: 1000;
-            text-decoration: none;
-        }
-        
         .info-note {
             background-color: #f9f9f9;
             border-left: 3px solid var(--secondary);
@@ -235,6 +229,11 @@
         .whatsapp-btn {
             background-color: #25D366;
             border-color: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            border-color: #128C7E;
         }
         
         .modal {
@@ -257,6 +256,12 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             padding: 20px;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .modal-header {
@@ -277,6 +282,11 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--gray);
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
         }
         
         .order-summary {
@@ -314,6 +324,21 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
         }
         
         .product-row {
@@ -348,6 +373,11 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #a00000;
         }
         
         .quantity-input {
@@ -366,6 +396,40 @@
             padding: 12px;
             font-size: 1rem;
             margin-top: 20px;
+        }
+        
+        .confirmation-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--primary);
+        }
+        
+        .delivery-options, .payment-options {
+            margin-bottom: 15px;
+        }
+        
+        .option-group {
+            margin-bottom: 10px;
+        }
+        
+        .option-group label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .option-group input {
+            margin-right: 5px;
         }
         
         @media (max-width: 768px) {
@@ -410,19 +474,24 @@
             .quantity-controls {
                 margin-top: 5px;
             }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="banner"></div>
+    <div class="banner" role="img" aria-label="Banner de productos cárnicos"></div>
     
     <header>
         <div class="container">
             <div class="logo-container">
-                <img src="https://github.com/KOOWEXA/servidor4/raw/refs/heads/main/logo.jpg" alt="Cárnicos Habana" class="logo-img">
-                <div class="logo-text">CÁRNICOS HABANA</div>
+                <img src="https://github.com/KOOWEXA/servidor4/raw/refs/heads/main/logo.jpg" alt="Cárnicos Habana - Logo" class="logo-img">
+                <h1 class="logo-text">CÁRNICOS HABANA</h1>
             </div>
-            <p class="tagline">Descubra la excelencia en ingredientes seleccionados. Productos nacionales e importados, listos para su uso.</p>
+            <p class="tagline">Productos nacionales e importados, listos para su uso.</p>
             <button id="openOrderModal" class="btn">Hacer Pedido</button>
             <a href="#products" class="btn btn-secondary">Ver Productos</a>
         </div>
@@ -432,7 +501,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Nuestros Productos</h2>
-                <p>Selección premium de carnes, mariscos y especialidades</p>
+                <p>SELECCIÓN ESPECIALIZADA</p>
             </div>
             <div class="products-grid">
                 <div class="category">
@@ -596,28 +665,62 @@
             <div class="customer-form">
                 <h3>Información del Cliente</h3>
                 <div class="form-group">
-                    <label for="customerName">Nombre completo</label>
+                    <label for="customerName" class="required">Nombre completo</label>
                     <input type="text" id="customerName" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="customerPhone">Teléfono</label>
+                    <label for="customerPhone" class="required">Teléfono</label>
                     <input type="tel" id="customerPhone" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="customerAddress">Dirección de entrega</label>
+                    <label for="customerAddress" class="required">Dirección de entrega</label>
                     <input type="text" id="customerAddress" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="customerNotes">Notas adicionales</label>
-                    <textarea id="customerNotes" class="form-control" rows="3"></textarea>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orderDate">Fecha del pedido</label>
+                        <input type="date" id="orderDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="orderTime">Horario de entrega</label>
+                        <select id="orderTime" class="form-control">
+                            <option value="">Seleccione horario</option>
+                            <option value="9:00 - 12:00">9:00 - 12:00</option>
+                            <option value="12:00 - 15:00">12:00 - 15:00</option>
+                            <option value="15:00 - 18:00">15:00 - 18:00</option>
+                            <option value="18:00 - 21:00">18:00 - 21:00</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="delivery-options">
+                    <h4>Entrega con mensajero</h4>
+                    <div class="option-group">
+                        <label><input type="radio" name="delivery" value="Si" checked> Sí</label>
+                        <label><input type="radio" name="delivery" value="No"> No</label>
+                    </div>
+                </div>
+                
+                <div class="payment-options">
+                    <h4>Forma de pago</h4>
+                    <div class="option-group">
+                        <label><input type="radio" name="payment" value="MN" checked> MN (Moneda Nacional)</label>
+                        <label><input type="radio" name="payment" value="MLC"> MLC</label>
+                        <label><input type="radio" name="payment" value="USD"> USD</label>
+                        <label><input type="radio" name="payment" value="EUR"> EUR</label>
+                        <label><input type="radio" name="payment" value="Zelle"> Zelle</label>
+                    </div>
                 </div>
                 
                 <button id="submitOrder" class="btn submit-order">Enviar Pedido por WhatsApp</button>
+                
+                <div id="confirmationMessage" class="confirmation-message">
+                    <p>¡Pedido enviado correctamente! Será redirigido a WhatsApp para confirmar su pedido.</p>
+                </div>
             </div>
         </div>
     </div>
-
-    <a href="https://wa.me/message/58692631?text=¡Hola! Me interesa en lo que oferta Cárnicos Habana" class="whatsapp-float" target="_blank">💬</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -628,6 +731,12 @@
             const orderItemsContainer = document.getElementById('orderItems');
             const totalAmountElement = document.getElementById('totalAmount');
             const submitOrderBtn = document.getElementById('submitOrder');
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            const orderDateInput = document.getElementById('orderDate');
+            
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            orderDateInput.value = formattedDate;
             
             const products = [
                 { name: "Alitas de Pollo 5lb", price: 3300, category: "DEL POLLO" },
@@ -651,6 +760,11 @@
             
             let order = {};
             
+            const savedOrder = localStorage.getItem('carnicosHabanaOrder');
+            if (savedOrder) {
+                order = JSON.parse(savedOrder);
+            }
+            
             function openModal() {
                 modal.style.display = 'block';
                 renderOrderForm();
@@ -658,6 +772,7 @@
             
             function closeModal() {
                 modal.style.display = 'none';
+                confirmationMessage.style.display = 'none';
             }
             
             openOrderModalBtn.addEventListener('click', openModal);
@@ -745,6 +860,8 @@
                     order[productName] = 0;
                 }
                 
+                localStorage.setItem('carnicosHabanaOrder', JSON.stringify(order));
+                
                 renderOrderForm();
             }
             
@@ -767,7 +884,14 @@
                 const customerName = document.getElementById('customerName').value;
                 const customerPhone = document.getElementById('customerPhone').value;
                 const customerAddress = document.getElementById('customerAddress').value;
-                const customerNotes = document.getElementById('customerNotes').value;
+                const orderDate = document.getElementById('orderDate').value;
+                const orderTime = document.getElementById('orderTime').value;
+                
+                const deliveryOption = document.querySelector('input[name="delivery"]:checked');
+                const delivery = deliveryOption ? deliveryOption.value : 'No especificado';
+                
+                const paymentOption = document.querySelector('input[name="payment"]:checked');
+                const payment = paymentOption ? paymentOption.value : 'No especificado';
                 
                 if (!customerName || !customerPhone || !customerAddress) {
                     alert('Por favor complete todos los campos obligatorios');
@@ -778,10 +902,14 @@
                 orderText += `*Cliente:* ${customerName}\n`;
                 orderText += `*Teléfono:* ${customerPhone}\n`;
                 orderText += `*Dirección:* ${customerAddress}\n`;
+                orderText += `*Fecha del pedido:* ${orderDate}\n`;
                 
-                if (customerNotes) {
-                    orderText += `*Notas:* ${customerNotes}\n`;
+                if (orderTime) {
+                    orderText += `*Horario de entrega:* ${orderTime}\n`;
                 }
+                
+                orderText += `*Entrega con mensajero:* ${delivery}\n`;
+                orderText += `*Forma de pago:* ${payment}\n`;
                 
                 orderText += `\n*Detalle del pedido:*\n`;
                 
@@ -808,11 +936,23 @@
                 orderText += `\n*Total: $${total}*\n\n`;
                 orderText += `Gracias, Cárnicos Habana!`;
                 
-                const encodedMessage = encodeURIComponent(orderText);
-                const whatsappUrl = `https://wa.me/5358692631?text=${encodedMessage}`;
+                confirmationMessage.style.display = 'block';
                 
-                window.open(whatsappUrl, '_blank');
-                closeModal();
+                setTimeout(() => {
+                    const encodedMessage = encodeURIComponent(orderText);
+                    const whatsappUrl = `https://wa.me/5358692631?text=${encodedMessage}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                    
+                    order = {};
+                    localStorage.removeItem('carnicosHabanaOrder');
+                    document.getElementById('customerName').value = '';
+                    document.getElementById('customerPhone').value = '';
+                    document.getElementById('customerAddress').value = '';
+                    document.getElementById('orderTime').value = '';
+                    
+                    closeModal();
+                }, 2000);
             }
             
             submitOrderBtn.addEventListener('click', sendOrder);

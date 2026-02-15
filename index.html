@@ -433,52 +433,58 @@
             margin-right: 5px;
         }
 
-        /* Modal de desactivación (transparente) */
-        .deactivation-modal {
-            display: none; /* Se muestra mediante JS */
+        .modal-deactivation {
+            display: flex;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
-            z-index: 3000; /* Por encima del otro modal */
-            justify-content: center;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 10000;
             align-items: center;
+            justify-content: center;
         }
 
-        .deactivation-modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 400px;
+        .modal-deactivation-content {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 16px;
+            max-width: 420px;
+            width: 90%;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            margin: 0 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .deactivation-modal-content h2 {
+        .modal-deactivation-content h2 {
             color: var(--primary);
             margin-bottom: 15px;
-            font-size: 1.6rem;
+            font-size: 1.9rem;
         }
 
-        .deactivation-modal-content p {
-            margin-bottom: 25px;
+        .modal-deactivation-content p {
+            margin: 20px 0 25px;
             font-size: 1rem;
-            color: var(--dark);
+            line-height: 1.5;
+            color: #2d2d2d;
         }
 
-        .deactivation-buttons {
+        .modal-deactivation-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .deactivation-buttons .btn {
-            flex: 1;
-            padding: 10px 5px;
-            font-size: 0.9rem;
+        .modal-deactivation-buttons .btn {
+            min-width: 140px;
+            margin: 0;
+        }
+
+        @media (max-width: 480px) {
+            .modal-deactivation-buttons .btn {
+                width: 100%;
+            }
         }
         
         @media (max-width: 768px) {
@@ -528,15 +534,21 @@
                 flex-direction: column;
                 gap: 0;
             }
-
-            .deactivation-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
 <body>
+    <div class="modal-deactivation">
+        <div class="modal-deactivation-content">
+            <h2>Plataforma Desactivada</h2>
+            <p>Esta plataforma está temporalmente desactivada. Para más información, por favor contacte vía WhatsApp.</p>
+            <div class="modal-deactivation-buttons">
+                <a href="https://koopages.github.io/oficial/" class="btn" style="background-color: #4A4A4A; border-color: #4A4A4A;">Regresar</a>
+                <a href="https://wa.me/5358692631?text=Hola%2C%20%C2%BFpor%20qu%C3%A9%20la%20plataforma%20est%C3%A1%20desactivada%3F" class="btn whatsapp-btn" target="_blank">Contactar por WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
     <div class="banner" role="img" aria-label="Banner de productos cárnicos"></div>
     
     <header>
@@ -703,7 +715,6 @@
         </div>
     </section>
 
-    <!-- Modal de pedido (existente) -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -777,54 +788,8 @@
         </div>
     </div>
 
-    <!-- Modal de desactivación (nuevo) -->
-    <div id="deactivationModal" class="deactivation-modal">
-        <div class="deactivation-modal-content">
-            <h2>Plataforma Desactivada</h2>
-            <p>Estimado cliente, la plataforma de pedidos se encuentra temporalmente desactivada. Para más información, puede contactarnos por WhatsApp o regresar a la página anterior.</p>
-            <div class="deactivation-buttons">
-                <button id="goBackBtn" class="btn">Retroceder</button>
-                <button id="contactWhatsAppBtn" class="btn whatsapp-btn">Contactar por WhatsApp</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Modal de desactivación ---
-            const deactivationModal = document.getElementById('deactivationModal');
-            const goBackBtn = document.getElementById('goBackBtn');
-            const contactWhatsAppBtn = document.getElementById('contactWhatsAppBtn');
-
-            // Mostrar modal y bloquear scroll
-            function showDeactivationModal() {
-                deactivationModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Evita scroll detrás del modal
-            }
-
-            // Función para ocultar (no se usa por ahora, pero disponible)
-            function hideDeactivationModal() {
-                deactivationModal.style.display = 'none';
-                document.body.style.overflow = ''; // Restaura scroll
-            }
-
-            // Evento botón "Retroceder"
-            goBackBtn.addEventListener('click', function() {
-                window.location.href = 'https://koopages.github.io/oficial/';
-            });
-
-            // Evento botón "Contactar por WhatsApp"
-            contactWhatsAppBtn.addEventListener('click', function() {
-                const phone = '5358692631'; // Código de país 53 + número 58692631
-                const message = encodeURIComponent('Hola, quisiera información sobre por qué la plataforma Cárnicos Habana está desactivada.');
-                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
-                // No cerramos el modal para que el usuario decida si también quiere retroceder
-            });
-
-            // Mostrar el modal al cargar la página
-            showDeactivationModal();
-
-            // --- Código existente del modal de pedido ---
             const modal = document.getElementById('orderModal');
             const openOrderModalBtn = document.getElementById('openOrderModal');
             const openOrderModalBtn2 = document.getElementById('openOrderModal2');
@@ -835,7 +800,6 @@
             const confirmationMessage = document.getElementById('confirmationMessage');
             const orderDateInput = document.getElementById('orderDate');
             
-            // Establecer fecha actual
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
             orderDateInput.value = formattedDate;
@@ -1007,7 +971,6 @@
                     return;
                 }
                 
-                // Formato mejorado para WhatsApp
                 let orderText = `🍖 *PEDIDO - CÁRNICOS HABANA* 🍖\n\n`;
                 orderText += `👤 *INFORMACIÓN DEL CLIENTE*\n`;
                 orderText += `• *Nombre:* ${customerName}\n`;
@@ -1029,7 +992,6 @@
                 let hasItems = false;
                 let total = 0;
                 
-                // Agrupar productos por categoría
                 const categories = [...new Set(products.map(product => product.category))];
                 
                 categories.forEach(category => {

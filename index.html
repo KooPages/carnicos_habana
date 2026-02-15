@@ -6,7 +6,7 @@
     <title>Cárnicos Habana</title>
     <meta name="description" content="Cárnicos Habana - Productos cárnicos de calidad, carnes, mariscos y especialidades. Entrega en toda La Habana. Múltiples formas de pago.">
     <meta name="keywords" content="carnes, productos cárnicos, habana, pollo, cerdo, res, mariscos, ahumados">
-<link rel="icon" type="image/jpg" href="logo.jpg">
+    <link rel="icon" type="image/jpg" href="logo.jpg">
     <style>
         :root {
             --primary: #8B0000;
@@ -432,6 +432,54 @@
         .option-group input {
             margin-right: 5px;
         }
+
+        /* Modal de desactivación (transparente) */
+        .deactivation-modal {
+            display: none; /* Se muestra mediante JS */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+            z-index: 3000; /* Por encima del otro modal */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .deactivation-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin: 0 15px;
+        }
+
+        .deactivation-modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .deactivation-modal-content p {
+            margin-bottom: 25px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .deactivation-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .deactivation-buttons .btn {
+            flex: 1;
+            padding: 10px 5px;
+            font-size: 0.9rem;
+        }
         
         @media (max-width: 768px) {
             .banner {
@@ -479,6 +527,11 @@
             .form-row {
                 flex-direction: column;
                 gap: 0;
+            }
+
+            .deactivation-buttons {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -650,6 +703,7 @@
         </div>
     </section>
 
+    <!-- Modal de pedido (existente) -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -723,8 +777,54 @@
         </div>
     </div>
 
+    <!-- Modal de desactivación (nuevo) -->
+    <div id="deactivationModal" class="deactivation-modal">
+        <div class="deactivation-modal-content">
+            <h2>Plataforma Desactivada</h2>
+            <p>Estimado cliente, la plataforma de pedidos se encuentra temporalmente desactivada. Para más información, puede contactarnos por WhatsApp o regresar a la página anterior.</p>
+            <div class="deactivation-buttons">
+                <button id="goBackBtn" class="btn">Retroceder</button>
+                <button id="contactWhatsAppBtn" class="btn whatsapp-btn">Contactar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Modal de desactivación ---
+            const deactivationModal = document.getElementById('deactivationModal');
+            const goBackBtn = document.getElementById('goBackBtn');
+            const contactWhatsAppBtn = document.getElementById('contactWhatsAppBtn');
+
+            // Mostrar modal y bloquear scroll
+            function showDeactivationModal() {
+                deactivationModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Evita scroll detrás del modal
+            }
+
+            // Función para ocultar (no se usa por ahora, pero disponible)
+            function hideDeactivationModal() {
+                deactivationModal.style.display = 'none';
+                document.body.style.overflow = ''; // Restaura scroll
+            }
+
+            // Evento botón "Retroceder"
+            goBackBtn.addEventListener('click', function() {
+                window.location.href = 'https://koopages.github.io/oficial/';
+            });
+
+            // Evento botón "Contactar por WhatsApp"
+            contactWhatsAppBtn.addEventListener('click', function() {
+                const phone = '5358692631'; // Código de país 53 + número 58692631
+                const message = encodeURIComponent('Hola, quisiera información sobre por qué la plataforma Cárnicos Habana está desactivada.');
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+                // No cerramos el modal para que el usuario decida si también quiere retroceder
+            });
+
+            // Mostrar el modal al cargar la página
+            showDeactivationModal();
+
+            // --- Código existente del modal de pedido ---
             const modal = document.getElementById('orderModal');
             const openOrderModalBtn = document.getElementById('openOrderModal');
             const openOrderModalBtn2 = document.getElementById('openOrderModal2');
@@ -735,7 +835,7 @@
             const confirmationMessage = document.getElementById('confirmationMessage');
             const orderDateInput = document.getElementById('orderDate');
             
-            // Establecer fecha actual sin año
+            // Establecer fecha actual
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
             orderDateInput.value = formattedDate;

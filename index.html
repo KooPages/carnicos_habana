@@ -1,1054 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cárnicos Habana</title>
-    <meta name="description" content="Cárnicos Habana - Productos cárnicos de calidad, carnes, mariscos y especialidades. Entrega en toda La Habana. Múltiples formas de pago.">
-    <meta name="keywords" content="carnes, productos cárnicos, habana, pollo, cerdo, res, mariscos, ahumados">
-    <link rel="icon" type="image/jpg" href="logo.jpg">
-    <style>
-        :root {
-            --primary: #8B0000;
-            --secondary: #D4AF37;
-            --dark: #1A1A1A;
-            --light: #FFFFFF;
-            --gray: #4A4A4A;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.4;
-        }
-        
-        .container {
-            width: 95%;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-        
-        .banner {
-            width: 100%;
-            height: 200px;
-            background-image: url('https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        header {
-            background: var(--dark);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        
-        .logo-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--secondary);
-            margin-right: 10px;
-        }
-        
-        .logo-text {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-        
-        .tagline {
-            font-size: 1rem;
-            margin-bottom: 15px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid var(--primary);
-            margin: 3px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #a00000;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-        }
-        
-        section {
-            padding: 25px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .section-title h2 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary);
-            margin: 0 auto;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        
-        .category {
-            background-color: white;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            padding: 15px;
-        }
-        
-        .category-title {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-            text-align: center;
-            border-bottom: 1px solid var(--secondary);
-            padding-bottom: 8px;
-        }
-        
-        .product-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9rem;
-        }
-        
-        .product-item:last-child {
-            border-bottom: none;
-        }
-        
-        .benefits {
-            background-color: var(--dark);
-            color: white;
-            padding: 20px 0;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-        
-        .benefit-item {
-            text-align: center;
-            padding: 10px;
-        }
-        
-        .benefit-icon {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-        
-        .benefit-item h3 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-        
-        .benefit-item p {
-            font-size: 0.85rem;
-        }
-        
-        .cta {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 25px 0;
-        }
-        
-        .cta h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .cta p {
-            max-width: 500px;
-            margin: 0 auto 15px;
-            font-size: 0.9rem;
-        }
-        
-        .info-note {
-            background-color: #f9f9f9;
-            border-left: 3px solid var(--secondary);
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 0.85rem;
-        }
-        
-        .whatsapp-btn {
-            background-color: #25D366;
-            border-color: #25D366;
-        }
-        
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            border-color: #128C7E;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 2000;
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 20px auto;
-            width: 95%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            padding: 20px;
-            animation: modalFadeIn 0.3s;
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-        
-        .modal-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .close-modal {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: color 0.3s;
-        }
-        
-        .close-modal:hover {
-            color: var(--primary);
-        }
-        
-        .order-summary {
-            background-color: #f9f9f9;
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .order-total {
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 10px;
-            color: var(--primary);
-        }
-        
-        .customer-form {
-            margin-top: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .product-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .product-name {
-            flex: 1;
-        }
-        
-        .product-price {
-            width: 80px;
-            text-align: right;
-            margin-right: 15px;
-        }
-        
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-        }
-        
-        .quantity-btn {
-            width: 30px;
-            height: 30px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        .quantity-btn:hover {
-            background-color: #a00000;
-        }
-        
-        .quantity-input {
-            width: 50px;
-            height: 30px;
-            text-align: center;
-            margin: 0 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .submit-order {
-            background-color: #25D366;
-            border-color: #25D366;
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            margin-top: 20px;
-        }
-        
-        .confirmation-message {
-            display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .required::after {
-            content: " *";
-            color: var(--primary);
-        }
-        
-        .delivery-options, .payment-options {
-            margin-bottom: 15px;
-        }
-        
-        .option-group {
-            margin-bottom: 10px;
-        }
-        
-        .option-group label {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-        
-        .option-group input {
-            margin-right: 5px;
-        }
-
-        .modal-deactivation {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-deactivation-content {
-            background: white;
-            padding: 30px 25px;
-            border-radius: 16px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .modal-deactivation-content h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.9rem;
-        }
-
-        .modal-deactivation-content p {
-            margin: 20px 0 25px;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #2d2d2d;
-        }
-
-        .modal-deactivation-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .modal-deactivation-buttons .btn {
-            min-width: 140px;
-            margin: 0;
-        }
-
-        @media (max-width: 480px) {
-            .modal-deactivation-buttons .btn {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .banner {
-                height: 150px;
-            }
-            
-            header {
-                padding: 15px 0;
-            }
-            
-            .logo-text {
-                font-size: 1.3rem;
-            }
-            
-            section {
-                padding: 20px 0;
-            }
-            
-            .section-title h2 {
-                font-size: 1.3rem;
-            }
-            
-            .cta h2 {
-                font-size: 1.3rem;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .product-price {
-                text-align: left;
-                margin: 5px 0;
-            }
-            
-            .quantity-controls {
-                margin-top: 5px;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso bloqueado</title>
+  <meta name="description" content="Esta plataforma ha caducado. Contacta con el propietario para renovar el acceso.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg-light: #eef2f6;
+      --bg-dark: #1a2634;
+      --card-light: #ffffff;
+      --card-dark: #1e2b39;
+      --text-light: #1a2b3f;
+      --text-dark: #e3eaf1;
+      --text-muted-light: #4a5f82;
+      --text-muted-dark: #9fb0cc;
+      --accent-light: #1f3c6b;
+      --accent-dark: #3466aa;
+      --border-light: #d9e2ef;
+      --border-dark: #2b3a4a;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --radius: 2rem;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      line-height: 1.5;
+      color: var(--text-light);
+    }
+    .contenedor-central {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .tarjeta {
+      background: var(--card-light);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3rem 2rem;
+      border: 1px solid var(--border-light);
+    }
+    .mensaje-acceso {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      background: #f0f5fe;
+      padding: 1rem 2rem;
+      border-radius: 3rem;
+      max-width: 500px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid var(--border-light);
+    }
+    .bloque-contacto {
+      background: #f8fcff;
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .bloque-contacto p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .bloque-contacto p i {
+      color: var(--accent-light);
+    }
+    .btn-contacto {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      background: var(--accent-light);
+      color: white;
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 3rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border: none;
+      box-shadow: 0 4px 10px rgba(31, 60, 107, 0.3);
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .btn-contacto i {
+      font-size: 1.2rem;
+    }
+    .btn-contacto:focus-visible {
+      outline: 3px solid var(--accent-light);
+      outline-offset: 3px;
+    }
+    @media (max-width: 480px) {
+      .tarjeta {
+        padding: 2rem 1.2rem;
+      }
+      .mensaje-acceso {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
+      }
+      .btn-contacto {
+        padding: 0.8rem 1.8rem;
+        font-size: 1.1rem;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+      .tarjeta {
+        background: var(--card-dark);
+        border-color: var(--border-dark);
+      }
+      .mensaje-acceso {
+        background: #1f2e3f;
+        color: var(--text-dark);
+        border-color: var(--border-dark);
+      }
+      .bloque-contacto {
+        background: #1b2735;
+        border-color: var(--border-dark);
+      }
+      .bloque-contacto p {
+        color: var(--text-dark);
+      }
+      .bloque-contacto p i {
+        color: var(--accent-dark);
+      }
+      .btn-contacto {
+        background: var(--accent-dark);
+        box-shadow: 0 4px 10px #1e3b5c;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="modal-deactivation">
-        <div class="modal-deactivation-content">
-            <h2>Plataforma Desactivada</h2>
-            <p>Esta plataforma está temporalmente desactivada. Para más información, por favor contacte vía WhatsApp.</p>
-            <div class="modal-deactivation-buttons">
-                <a href="https://koopages.github.io/oficial/" class="btn" style="background-color: #4A4A4A; border-color: #4A4A4A;">Regresar</a>
-                <a href="https://wa.me/5358692631?text=Hola%2C%20%C2%BFpor%20qu%C3%A9%20la%20plataforma%20est%C3%A1%20desactivada%3F" class="btn whatsapp-btn" target="_blank">Contactar por WhatsApp</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="banner" role="img" aria-label="Banner de productos cárnicos"></div>
-    
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <img src="https://github.com/KOOWEXA/servidor4/raw/refs/heads/main/logo.jpg" alt="Cárnicos Habana - Logo" class="logo-img">
-                <h1 class="logo-text">CÁRNICOS HABANA</h1>
-            </div>
-            <p class="tagline">Productos nacionales e importados, listos para su uso.</p>
-            <button id="openOrderModal" class="btn">Hacer Pedido</button>
-            <a href="#products" class="btn btn-secondary">Ver Productos</a>
-        </div>
-    </header>
-
-    <section id="products">
-        <div class="container">
-            <div class="section-title">
-                <h2>Nuestros Productos</h2>
-                <p>SELECCIÓN ESPECIALIZADA</p>
-            </div>
-            <div class="products-grid">
-                <div class="category">
-                    <h3 class="category-title">*OFERTAS DEL DÍA*</h3>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*DEL POLLO*</h3>
-                    <div class="product-item">
-                        <span>Alitas de Pollo 5lb</span>
-                        <span>*$3300</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Masa Cárnica original de prodal 1 kg</span>
-                        <span>*$1200</span>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*DEL CERDO*</h3>
-                    <div class="product-item">
-                        <span>Troceado de cerdo 1kg</span>
-                        <span>*3600</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Lomo lasqueado 1kg</span>
-                        <span>*3500</span>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*AHUMADO*</h3>
-                    <div class="product-item">
-                        <span>Lomo ahumado 1kg</span>
-                        <span>*$3300</span>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*DE RES*</h3>
-                    <div class="product-item">
-                        <span>Boliche de Res 5lb</span>
-                        <span>*$9000</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Filetes de res 2kg</span>
-                        <span>*$9000</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Lomo de Res 2kg</span>
-                        <span>*$8700</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Bistec de res 1kg</span>
-                        <span>*$4750</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Troceado de res 1kg</span>
-                        <span>*$4500</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Carne molida de res 1kg</span>
-                        <span>*$2800</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Bistec de Hígado de res 1kg</span>
-                        <span>*$2600</span>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*DEL MAR*</h3>
-                    <div class="product-item">
-                        <span>Ruedas de Bonito 1kg</span>
-                        <span>*$3000</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Filetes de Sobaco 1kg</span>
-                        <span>*$3300</span>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <h3 class="category-title">*Variados Mixtos*</h3>
-                    <div class="product-item">
-                        <span>Aceite de Oliva Extra Virgen 250 ml</span>
-                        <span>*$1800</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Potagin 500g</span>
-                        <span>*$1700</span>
-                    </div>
-                    <div class="product-item">
-                        <span>Galón de Aceite Refinado (no es sellado) 5lt</span>
-                        <span>*$5800</span>
-                    </div>
-                </div>
-                
-                <div class="info-note">
-                    <p><strong>* Todos los paquetes son sellados al vacío y etiquetados</strong></p>
-                    <p><strong>* Mínimo de compra 10 x cada producto</strong></p>
-                    <p><strong>* Se entrega Factura</strong></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2 style="color: white;">Ventajas Exclusivas</h2>
-                <p style="color: #ddd;">Por qué elegir Cárnicos Habana</p>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">💳</div>
-                    <h3>Múltiples Formas de Pago</h3>
-                    <p>Aceptamos MN, MLC, USD, EUR y Zelle</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">📄</div>
-                    <h3>Documentación Completa</h3>
-                    <p>Facturas y comprobantes para todas sus compras</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🚚</div>
-                    <h3>Entrega Garantizada</h3>
-                    <p>Mensajería confiable en toda La Habana</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">👨‍🍳</div>
-                    <h3>Productos Listos</h3>
-                    <p>Listos para usar, sellados al vacío</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta" id="contact">
-        <div class="container">
-            <h2>Convierta cada comida en una experiencia</h2>
-            <p>Productos de calidad listos para inspirar su próxima creación culinaria</p>
-            <button id="openOrderModal2" class="btn whatsapp-btn">Hacer Pedido</button>
-            <a href="https://chat.whatsapp.com/JiS0roECwUh1Tkh7sXjJAK?mode=ems_copy_t" class="btn btn-secondary">Unirse al Grupo</a>
-        </div>
-    </section>
-
-    <div id="orderModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Realizar Pedido</h2>
-                <span class="close-modal">&times;</span>
-            </div>
-            
-            <div class="order-summary">
-                <h3>Resumen del Pedido</h3>
-                <div id="orderItems"></div>
-                <div class="order-total">Total: $<span id="totalAmount">0</span></div>
-            </div>
-            
-            <div class="customer-form">
-                <h3>Información del Cliente</h3>
-                <div class="form-group">
-                    <label for="customerName" class="required">Nombre completo</label>
-                    <input type="text" id="customerName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhone" class="required">Teléfono</label>
-                    <input type="tel" id="customerPhone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerAddress" class="required">Dirección de entrega</label>
-                    <input type="text" id="customerAddress" class="form-control" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="orderDate">Fecha del pedido</label>
-                        <input type="date" id="orderDate" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="orderTime">Horario de entrega</label>
-                        <select id="orderTime" class="form-control">
-                            <option value="">Seleccione horario</option>
-                            <option value="9:00 - 12:00">9:00 - 12:00</option>
-                            <option value="12:00 - 15:00">12:00 - 15:00</option>
-                            <option value="15:00 - 18:00">15:00 - 18:00</option>
-                            <option value="18:00 - 21:00">18:00 - 21:00</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="delivery-options">
-                    <h4>Entrega con mensajero</h4>
-                    <div class="option-group">
-                        <label><input type="radio" name="delivery" value="Si" checked> Sí</label>
-                        <label><input type="radio" name="delivery" value="No"> No</label>
-                    </div>
-                </div>
-                
-                <div class="payment-options">
-                    <h4>Forma de pago</h4>
-                    <div class="option-group">
-                        <label><input type="radio" name="payment" value="MN" checked> MN (Moneda Nacional)</label>
-                        <label><input type="radio" name="payment" value="MLC"> MLC</label>
-                        <label><input type="radio" name="payment" value="USD"> USD</label>
-                        <label><input type="radio" name="payment" value="EUR"> EUR</label>
-                        <label><input type="radio" name="payment" value="Zelle"> Zelle</label>
-                    </div>
-                </div>
-                
-                <button id="submitOrder" class="btn submit-order">Enviar Pedido por WhatsApp</button>
-                
-                <div id="confirmationMessage" class="confirmation-message">
-                    <p>¡Pedido enviado correctamente! Será redirigido a WhatsApp para confirmar su pedido.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('orderModal');
-            const openOrderModalBtn = document.getElementById('openOrderModal');
-            const openOrderModalBtn2 = document.getElementById('openOrderModal2');
-            const closeModalBtn = document.querySelector('.close-modal');
-            const orderItemsContainer = document.getElementById('orderItems');
-            const totalAmountElement = document.getElementById('totalAmount');
-            const submitOrderBtn = document.getElementById('submitOrder');
-            const confirmationMessage = document.getElementById('confirmationMessage');
-            const orderDateInput = document.getElementById('orderDate');
-            
-            const today = new Date();
-            const formattedDate = today.toISOString().split('T')[0];
-            orderDateInput.value = formattedDate;
-            
-            const products = [
-                { name: "Alitas de Pollo 5lb", price: 3300, category: "DEL POLLO" },
-                { name: "Masa Cárnica original de prodal 1 kg", price: 1200, category: "DEL POLLO" },
-                { name: "Troceado de cerdo 1kg", price: 3600, category: "DEL CERDO" },
-                { name: "Lomo lasqueado 1kg", price: 3500, category: "DEL CERDO" },
-                { name: "Lomo ahumado 1kg", price: 3300, category: "AHUMADO" },
-                { name: "Boliche de Res 5lb", price: 9000, category: "DE RES" },
-                { name: "Filetes de res 2kg", price: 9000, category: "DE RES" },
-                { name: "Lomo de Res 2kg", price: 8700, category: "DE RES" },
-                { name: "Bistec de res 1kg", price: 4750, category: "DE RES" },
-                { name: "Troceado de res 1kg", price: 4500, category: "DE RES" },
-                { name: "Carne molida de res 1kg", price: 2800, category: "DE RES" },
-                { name: "Bistec de Hígado de res 1kg", price: 2600, category: "DE RES" },
-                { name: "Ruedas de Bonito 1kg", price: 3000, category: "DEL MAR" },
-                { name: "Filetes de Sobaco 1kg", price: 3300, category: "DEL MAR" },
-                { name: "Aceite de Oliva Extra Virgen 250 ml", price: 1800, category: "VARIADOS MIXTOS" },
-                { name: "Potagin 500g", price: 1700, category: "VARIADOS MIXTOS" },
-                { name: "Galón de Aceite Refinado (no es sellado) 5lt", price: 5800, category: "VARIADOS MIXTOS" }
-            ];
-            
-            let order = {};
-            
-            const savedOrder = localStorage.getItem('carnicosHabanaOrder');
-            if (savedOrder) {
-                order = JSON.parse(savedOrder);
-            }
-            
-            function openModal() {
-                modal.style.display = 'block';
-                renderOrderForm();
-            }
-            
-            function closeModal() {
-                modal.style.display = 'none';
-                confirmationMessage.style.display = 'none';
-            }
-            
-            openOrderModalBtn.addEventListener('click', openModal);
-            openOrderModalBtn2.addEventListener('click', openModal);
-            closeModalBtn.addEventListener('click', closeModal);
-            
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            function renderOrderForm() {
-                orderItemsContainer.innerHTML = '';
-                
-                const categories = [...new Set(products.map(product => product.category))];
-                
-                categories.forEach(category => {
-                    const categoryTitle = document.createElement('h4');
-                    categoryTitle.textContent = `*${category}*`;
-                    categoryTitle.style.marginTop = '15px';
-                    categoryTitle.style.marginBottom = '10px';
-                    categoryTitle.style.color = 'var(--primary)';
-                    orderItemsContainer.appendChild(categoryTitle);
-                    
-                    const categoryProducts = products.filter(product => product.category === category);
-                    
-                    categoryProducts.forEach(product => {
-                        const productRow = document.createElement('div');
-                        productRow.className = 'product-row';
-                        
-                        const productName = document.createElement('div');
-                        productName.className = 'product-name';
-                        productName.textContent = product.name;
-                        
-                        const productPrice = document.createElement('div');
-                        productPrice.className = 'product-price';
-                        productPrice.textContent = `$${product.price}`;
-                        
-                        const quantityControls = document.createElement('div');
-                        quantityControls.className = 'quantity-controls';
-                        
-                        const decreaseBtn = document.createElement('button');
-                        decreaseBtn.className = 'quantity-btn';
-                        decreaseBtn.textContent = '-';
-                        decreaseBtn.addEventListener('click', () => updateQuantity(product.name, -1));
-                        
-                        const quantityInput = document.createElement('input');
-                        quantityInput.type = 'number';
-                        quantityInput.className = 'quantity-input';
-                        quantityInput.value = order[product.name] || 0;
-                        quantityInput.min = 0;
-                        quantityInput.addEventListener('change', (e) => {
-                            updateQuantity(product.name, parseInt(e.target.value) - (order[product.name] || 0));
-                        });
-                        
-                        const increaseBtn = document.createElement('button');
-                        increaseBtn.className = 'quantity-btn';
-                        increaseBtn.textContent = '+';
-                        increaseBtn.addEventListener('click', () => updateQuantity(product.name, 1));
-                        
-                        quantityControls.appendChild(decreaseBtn);
-                        quantityControls.appendChild(quantityInput);
-                        quantityControls.appendChild(increaseBtn);
-                        
-                        productRow.appendChild(productName);
-                        productRow.appendChild(productPrice);
-                        productRow.appendChild(quantityControls);
-                        
-                        orderItemsContainer.appendChild(productRow);
-                    });
-                });
-                
-                updateTotal();
-            }
-            
-            function updateQuantity(productName, change) {
-                if (!order[productName]) {
-                    order[productName] = 0;
-                }
-                
-                order[productName] += change;
-                
-                if (order[productName] < 0) {
-                    order[productName] = 0;
-                }
-                
-                localStorage.setItem('carnicosHabanaOrder', JSON.stringify(order));
-                
-                renderOrderForm();
-            }
-            
-            function updateTotal() {
-                let total = 0;
-                
-                for (const productName in order) {
-                    if (order[productName] > 0) {
-                        const product = products.find(p => p.name === productName);
-                        if (product) {
-                            total += product.price * order[productName];
-                        }
-                    }
-                }
-                
-                totalAmountElement.textContent = total;
-            }
-            
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
-                return `${day}/${month}`;
-            }
-            
-            function sendOrder() {
-                const customerName = document.getElementById('customerName').value;
-                const customerPhone = document.getElementById('customerPhone').value;
-                const customerAddress = document.getElementById('customerAddress').value;
-                const orderDate = document.getElementById('orderDate').value;
-                const orderTime = document.getElementById('orderTime').value;
-                
-                const deliveryOption = document.querySelector('input[name="delivery"]:checked');
-                const delivery = deliveryOption ? deliveryOption.value : 'No especificado';
-                
-                const paymentOption = document.querySelector('input[name="payment"]:checked');
-                const payment = paymentOption ? paymentOption.value : 'No especificado';
-                
-                if (!customerName || !customerPhone || !customerAddress) {
-                    alert('Por favor complete todos los campos obligatorios');
-                    return;
-                }
-                
-                let orderText = `🍖 *PEDIDO - CÁRNICOS HABANA* 🍖\n\n`;
-                orderText += `👤 *INFORMACIÓN DEL CLIENTE*\n`;
-                orderText += `• *Nombre:* ${customerName}\n`;
-                orderText += `• *Teléfono:* ${customerPhone}\n`;
-                orderText += `• *Dirección:* ${customerAddress}\n\n`;
-                
-                orderText += `📅 *INFORMACIÓN DEL PEDIDO*\n`;
-                orderText += `• *Fecha:* ${formatDate(orderDate)}\n`;
-                
-                if (orderTime) {
-                    orderText += `• *Horario de entrega:* ${orderTime}\n`;
-                }
-                
-                orderText += `• *Entrega con mensajero:* ${delivery}\n`;
-                orderText += `• *Forma de pago:* ${payment}\n\n`;
-                
-                orderText += `🛒 *DETALLE DEL PEDIDO*\n`;
-                
-                let hasItems = false;
-                let total = 0;
-                
-                const categories = [...new Set(products.map(product => product.category))];
-                
-                categories.forEach(category => {
-                    let categoryHasItems = false;
-                    let categoryText = `\n*${category}*\n`;
-                    
-                    for (const productName in order) {
-                        if (order[productName] > 0) {
-                            const product = products.find(p => p.name === productName && p.category === category);
-                            if (product) {
-                                categoryHasItems = true;
-                                hasItems = true;
-                                const subtotal = product.price * order[productName];
-                                categoryText += `• ${productName}: ${order[productName]} x $${product.price} = $${subtotal}\n`;
-                                total += subtotal;
-                            }
-                        }
-                    }
-                    
-                    if (categoryHasItems) {
-                        orderText += categoryText;
-                    }
-                });
-                
-                if (!hasItems) {
-                    alert('Por favor seleccione al menos un producto');
-                    return;
-                }
-                
-                orderText += `\n💰 *TOTAL DEL PEDIDO: $${total}*\n\n`;
-                orderText += `📋 *NOTAS ADICIONALES*\n`;
-                orderText += `• Todos los paquetes son sellados al vacío y etiquetados\n`;
-                orderText += `• Mínimo de compra 10 x cada producto\n`;
-                orderText += `• Se entrega factura\n\n`;
-                orderText += `¡Gracias por su pedido! 🎉`;
-                
-                confirmationMessage.style.display = 'block';
-                
-                setTimeout(() => {
-                    const encodedMessage = encodeURIComponent(orderText);
-                    const whatsappUrl = `https://wa.me/5358692631?text=${encodedMessage}`;
-                    
-                    window.open(whatsappUrl, '_blank');
-                    
-                    order = {};
-                    localStorage.removeItem('carnicosHabanaOrder');
-                    document.getElementById('customerName').value = '';
-                    document.getElementById('customerPhone').value = '';
-                    document.getElementById('customerAddress').value = '';
-                    document.getElementById('orderTime').value = '';
-                    
-                    closeModal();
-                }, 2000);
-            }
-            
-            submitOrderBtn.addEventListener('click', sendOrder);
-        });
-    </script>
+  <div class="contenedor-central">
+    <article class="tarjeta" role="main">
+      <section>
+        <p class="mensaje-acceso">
+          <i class="fas fa-lock" aria-hidden="true"></i> 
+          No puedes visualizar el contenido porque esta plataforma ha expirado.
+        </p>
+      </section>
+      <section class="bloque-contacto">
+        <p>
+          <i class="fas fa-envelope-open-text" aria-hidden="true"></i> 
+          Contacta con el propietario de la web
+        </p>
+        <a href="tel:+5363228179" class="btn-contacto" aria-label="Llamar al propietario +53 63228179">
+          <i class="fas fa-paper-plane" aria-hidden="true"></i>
+          +53 58692631
+        </a>
+      </section>
+    </article>
+  </div>
 </body>
 </html>
